@@ -16,7 +16,7 @@ type (
 		Word(rawWord string) (Word, error)
 		MostSearched(page int) ([]string, error)
 	}
-	// Scrap is the base instance to make word search
+	// Scrap is the base instance to make word
 	Scrap struct {
 		collector *colly.Collector
 	}
@@ -133,7 +133,7 @@ func (w *Scrap) MostSearched(page int) ([]string, error) {
 		mu.Lock()
 		defer mu.Unlock()
 
-		words = append(words, e.Text)
+		words = append(words, strings.TrimSpace(e.Text))
 	})
 
 	err := c.Visit(fmt.Sprintf("https://www.dicio.com.br/palavras-mais-buscadas/%d/", page))
