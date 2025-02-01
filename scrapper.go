@@ -29,9 +29,17 @@ func NewScrap() *Scrap {
 	}
 }
 
+func (*Scrap) Slug(word string) string {
+	noAccentsWord := sanitize.Accents(word)
+	noEdgingSpacesWord := strings.TrimSpace(noAccentsWord)
+	noUppercasesWord := strings.ToLower(noEdgingSpacesWord)
+	noSpacesWord := strings.ReplaceAll(noUppercasesWord, " ", "-")
+	return noSpacesWord
+}
+
 // Word populates an instance of Word based on extracted content.
 func (w *Scrap) Word(rawWord string) (Word, error) {
-	rawWord = strings.ReplaceAll(strings.TrimSpace(sanitize.Accents(rawWord)), " ", "-")
+	sanitizedWord := w.Slug(rawWord)
 
 	c := w.collector.Clone()
 
@@ -46,7 +54,7 @@ func (w *Scrap) Word(rawWord string) (Word, error) {
 	setPhrases(c, &mu, &word)
 	setSynonyms(c, &mu, &word)
 
-	err := c.Visit(fmt.Sprintf("https://www.dicio.com.br/%s", rawWord))
+	err := c.Visit(fmt.Sprintf("https://www.dicio.com.br/%s", sanitizedWord))
 	if err != nil {
 		return Word{}, fmt.Errorf("%w: %s", ErrCantVisit, err)
 	}
