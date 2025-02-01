@@ -1,9 +1,9 @@
 package scrapper_test
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/bruceneco/brwords"
-	"github.com/segmentio/encoding/json"
 	"github.com/stretchr/testify/assert"
 	"os"
 	"testing"
