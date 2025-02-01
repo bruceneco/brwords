@@ -77,7 +77,7 @@ func formatMeanings(word brwords.Word, sb *strings.Builder) {
 			if meaning.Tag != "" {
 				tag = fmt.Sprintf("[%s] ", meaning.Tag)
 			}
-			sb.WriteString(fmt.Sprintf("\n   %d. %s%s", i+1, tag, meaning.Content))
+			sb.WriteString(fmt.Sprintf("\n\t%d. %s%s", i+1, tag, meaning.Content))
 		}
 	} else {
 		sb.WriteString(color.RedString("Nenhum encontrado."))
