@@ -14,7 +14,6 @@ type (
 	// Scrapper is definition of what the Scrap implements.
 	Scrapper interface {
 		Word(rawWord string) (Word, error)
-		MostSearched(page int) ([]string, error)
 	}
 	// Scrap is the base instance to make word
 	Scrap struct {
@@ -122,32 +121,4 @@ func setSynonyms(c *colly.Collector, mu *sync.Mutex, word *Word) {
 
 		word.Synonyms = append(word.Synonyms, e.Text)
 	})
-}
-
-// MostSearched get a list of most searched words.
-// The list is paginated and the page index go from 1 to 50
-// (any passed value below or above this range will be trimmed).
-func (w *Scrap) MostSearched(page int) ([]string, error) {
-	if page <= 0 {
-		page = 1
-	} else if page > 50 {
-		page = 50
-	}
-	var words []string
-	var mu sync.Mutex
-	c := w.collector.Clone()
-
-	c.OnHTML("ul.list > li > a", func(e *colly.HTMLElement) {
-		mu.Lock()
-		defer mu.Unlock()
-
-		words = append(words, strings.TrimSpace(e.Text))
-	})
-
-	err := c.Visit(fmt.Sprintf("https://www.dicio.com.br/palavras-mais-buscadas/%d/", page))
-	if err != nil {
-		return nil, fmt.Errorf("%w: %w", ErrCantVisit, err)
-	}
-
-	return words, nil
 }
