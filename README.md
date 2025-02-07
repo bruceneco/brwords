@@ -3,7 +3,7 @@
 ### Please DO NOT flood dicio website with requests. Using it from CLI is fine, but you must use some cache if you are going to use it in a project that processes many words.
 ## Overview
 
-The `brwords` package is a Go package that provides an easy way to extract word meanings, synonyms, etymologies, and usage examples from the (Dicio)[https://dicio.com.br] website (a popular Brazilian Portuguese dictionary). The package includes a Command Line Interface (CLI) tool that enables users to access these features directly from the terminal.
+The `brwords` package is a Go package that provides an easy way to extract word meanings, synonyms, etymologies, and usage examples from the [Dicio](https://dicio.com.br) website (a popular Brazilian Portuguese dictionary). The package includes a Command Line Interface (CLI) tool that enables users to access these features directly from the terminal.
 
 ## Features
 
@@ -14,7 +14,7 @@ The `brwords` package is a Go package that provides an easy way to extract word 
 - **Command-Line Interface**: Access the functionality directly from the terminal.
 - **Simple Installation**: Install the CLI with a single command.
 
-## Usage
+## Usage  - [Full documentation here](https://pkg.go.dev/github.com/bruceneco/brwords)
 Note: the output is completely in Brazilian Portuguese, but the code and exposed interfaces are in English.
 
 First, add the package using the following command:
