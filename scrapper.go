@@ -28,6 +28,7 @@ func NewScrap() *Scrap {
 	}
 }
 
+// Slug generates a slug based on a word, sanitizing it.
 func (*Scrap) Slug(word string) string {
 	noAccentsWord := sanitize.Accents(word)
 	noEdgingSpacesWord := strings.TrimSpace(noAccentsWord)
